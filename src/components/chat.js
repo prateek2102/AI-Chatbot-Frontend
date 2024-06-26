@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 import loader from '../assets/loader.gif'; 
-
 const Chat = () => {
   const [messages, setMessages] = useState([]);
   const [input, setInput] = useState('');
@@ -18,7 +17,7 @@ const Chat = () => {
     try {
       setIsLoading(true); 
 
-      const response = await fetch('http://localhost:3000/chat', {
+      const response = await fetch(process.env.REACT_APP_API_URL, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -45,19 +44,18 @@ const Chat = () => {
       <div className="flex items-center justify-between w-full max-w-4xl mb-4">
         <h1 className={`text-4xl font-bold text-center mx-auto font-serif ${darkMode ? 'text-gray-200' : 'text-terracotta'}`}>🤖 Personal Assistant 🚀</h1>
         <button className={`bg-${darkMode ? 'terracotta' : 'muted-teal'} text-gray-800 px-4 py-2 rounded flex items-center justify-center hover:bg-${darkMode ? 'terracotta-dark' : 'white'}`} onClick={toggleDarkMode}>
-  <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" className="w-6 h-6 mr-2">
-    <path stroke-linecap="round" stroke-linejoin="round" d="M21.752 15.002A9.72 9.72 0 0 1 18 15.75c-5.385 0-9.75-4.365-9.75-9.75 0-1.33.266-2.597.748-3.752A9.753 9.753 0 0 0 3 11.25C3 16.635 7.365 21 12.75 21a9.753 9.753 0 0 0 9.002-5.998Z" />
-  </svg>
-  {darkMode ? 'Light Mode' : 'Dark Mode'}
-</button>
-
+        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth="1.5" stroke="currentColor" className="w-6 h-6 mr-2">
+  <path strokeLinecap="round" strokeLinejoin="round" d="M21.752 15.002A9.72 9.72 0 0 1 18 15.75c-5.385 0-9.75-4.365-9.75-9.75 0-1.33.266-2.597.748-3.752A9.753 9.753 0 0 0 3 11.25C3 16.635 7.365 21 12.75 21a9.753 9.753 0 0 0 9.002-5.998Z" />
+</svg>
+{darkMode ? 'Light Mode' : 'Dark Mode'}
+        </button>
       </div>
       <div className={`bg-${darkMode ? 'dark' : 'light'}-beige p-4 rounded shadow-lg w-full max-w-4xl relative`}>
         <div className={`h-96 overflow-y-auto mb-4 ${isLoading ? 'opacity-50' : ''}`}>
           {messages.map((msg, index) => (
             <div key={index} className={`mb-2 ${msg.user === 'You' ? 'text-right' : ''}`}>
               <span className={`px-2 py-1 rounded ${msg.user === 'You' ? ' text-gray-800' : 'bg-terracotta'} ${darkMode ? 'dark:text-white' : ''}`}>
-             {msg.text}
+                {msg.text}
               </span>
             </div>
           ))}
@@ -84,4 +82,4 @@ const Chat = () => {
   );
 };
 
-export default Chat; 
+export default Chat;
