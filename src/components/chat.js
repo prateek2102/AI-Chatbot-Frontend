@@ -4,7 +4,7 @@ import loader from '../assets/loader.gif';
 const Chat = () => {
   const [messages, setMessages] = useState([]);
   const [input, setInput] = useState('');
-  const [darkMode, setDarkMode] = useState(false);
+  const [darkMode, setDarkMode] = useState(true);
   const [isLoading, setIsLoading] = useState(false);
   const messagesEndRef = useRef(null);
 
@@ -109,7 +109,7 @@ const Chat = () => {
           </div>
           {isLoading && (
             <div className="absolute inset-0 flex items-center justify-center bg-transparent z-10">
-              <img src={loader} alt="Loading..." className="animate-bounce h-16 w-16" />
+              <img src={loader} alt="Loading..." className="animate-bounce h-24 w-24" />
             </div>
           )}
           <form onSubmit={handleSubmit} className="flex mt-2">
