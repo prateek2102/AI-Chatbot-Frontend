@@ -11,7 +11,7 @@ const Loader = () => {
         transition={{ type: 'spring', stiffness: 80 }}
         className="text-white text-4xl font-bold relative"
       >
-        Welcome to ChatMate
+        Welcome to ChatMate 👨🏻‍💻
       </motion.div>
 
       {/* Animation for balls */}
