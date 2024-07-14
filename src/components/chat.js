@@ -32,8 +32,10 @@ const Chat = () => {
       }
 
       const data = await response.json();
-      setMessages([...messages, { user: 'You', text: input }, { user: 'Bot', text: data.reply }]);
-      setInput('');
+      const cleanResponse = data.reply.replace(/^\d+\.\s+/gm, '').replace(/\*\*/g, '').trim();
+
+      setMessages([...messages, { user: 'You', text: input }, { user: 'Bot', text: cleanResponse }]);
+    setInput('');
     } catch (error) {
       console.error('Error fetching data:', error);
     } finally {
