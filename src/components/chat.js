@@ -47,6 +47,22 @@ const Chat = () => {
     messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' });
   }, [messages]);
 
+    // function to send a keep-alive request
+    const keepAlive = async () => {
+      try {
+        await fetch(process.env.REACT_APP_API_URL, {
+          method: 'GET',
+        });
+      } catch (error) {
+        console.error('Keep-alive request failed:', error);
+      }
+    };
+  
+    useEffect(() => {
+      const interval = setInterval(keepAlive, 49000); // Sends a request every 49 seconds
+      return () => clearInterval(interval); // Cleanup interval on component unmount
+    }, []);
+
   return (
     <div className={`flex flex-col items-center justify-center min-h-screen ${darkMode ? 'bg-stone-900 text-white' : 'bg-gray-100 text-gray-800'} transition-all duration-500`}>
       <div className="w-full max-w-4xl rounded-lg shadow-lg">
